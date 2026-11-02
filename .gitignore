@@ -1,0 +1,12 @@
+# Segredos
+.env
+
+# Ambiente virtual e caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Resultados locais. Os resultados de docs/results vão para o repositório.
+outputs/

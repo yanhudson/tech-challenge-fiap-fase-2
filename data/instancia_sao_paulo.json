@@ -1,0 +1,51 @@
+{
+  "name": "Distribuição hospitalar em São Paulo (dados sintéticos)",
+  "note": "Instância fictícia criada para o Tech Challenge. Nomes de unidades e pacientes são inventados; as coordenadas são aproximações de bairros de São Paulo.",
+  "depot": {
+    "name": "Centro de Distribuição do Hospital Universitário (Butantã)",
+    "lat": -23.5655,
+    "lon": -46.7395
+  },
+  "departure": "08:00",
+  "shift_hours": 8,
+  "road_factor": 1.35,
+  "vehicles": [
+    {"id": "V1", "name": "Fiorino refrigerada", "capacity_kg": 250, "range_km": 140, "speed_kmh": 30, "cost_per_km": 1.90, "refrigerated": true},
+    {"id": "V2", "name": "Van refrigerada", "capacity_kg": 450, "range_km": 180, "speed_kmh": 28, "cost_per_km": 2.40, "refrigerated": true},
+    {"id": "V3", "name": "Van de carga", "capacity_kg": 500, "range_km": 220, "speed_kmh": 28, "cost_per_km": 2.10, "refrigerated": false},
+    {"id": "V4", "name": "Utilitário elétrico", "capacity_kg": 300, "range_km": 90, "speed_kmh": 30, "cost_per_km": 0.80, "refrigerated": false},
+    {"id": "V5", "name": "Moto de entrega", "capacity_kg": 30, "range_km": 120, "speed_kmh": 38, "cost_per_km": 0.55, "refrigerated": false}
+  ],
+  "deliveries": [
+    {"id": "E01", "name": "UBS Pinheiros", "kind": "unidade", "lat": -23.5615, "lon": -46.6914, "item": "Material de curativo", "demand_kg": 45, "priority": "regular", "deadline": "15:00", "service_min": 10, "cold_chain": false},
+    {"id": "E02", "name": "Hospital-Dia Lapa", "kind": "unidade", "lat": -23.5206, "lon": -46.7036, "item": "Quimioterápicos", "demand_kg": 18, "priority": "critica", "deadline": "09:30", "service_min": 15, "cold_chain": true},
+    {"id": "E03", "name": "AMA Vila Mariana", "kind": "unidade", "lat": -23.5893, "lon": -46.6345, "item": "Luvas e EPIs", "demand_kg": 70, "priority": "regular", "deadline": "14:00", "service_min": 10, "cold_chain": false},
+    {"id": "E04", "name": "Pronto-Socorro Santo Amaro", "kind": "unidade", "lat": -23.6548, "lon": -46.7097, "item": "Hemoderivados", "demand_kg": 25, "priority": "critica", "deadline": "09:45", "service_min": 15, "cold_chain": true},
+    {"id": "E05", "name": "UBS Moema", "kind": "unidade", "lat": -23.6010, "lon": -46.6650, "item": "Vacinas", "demand_kg": 20, "priority": "alta", "deadline": "11:00", "service_min": 10, "cold_chain": true},
+    {"id": "E06", "name": "Hospital-Dia Tatuapé", "kind": "unidade", "lat": -23.5405, "lon": -46.5763, "item": "Antibióticos injetáveis", "demand_kg": 35, "priority": "critica", "deadline": "10:30", "service_min": 15, "cold_chain": false},
+    {"id": "E07", "name": "UBS Mooca", "kind": "unidade", "lat": -23.5590, "lon": -46.5990, "item": "Material de curativo", "demand_kg": 60, "priority": "regular", "deadline": "15:00", "service_min": 10, "cold_chain": false},
+    {"id": "E08", "name": "AMA Santana", "kind": "unidade", "lat": -23.5030, "lon": -46.6250, "item": "Soros e eletrólitos", "demand_kg": 110, "priority": "alta", "deadline": "12:00", "service_min": 15, "cold_chain": false},
+    {"id": "E09", "name": "UBS Ipiranga", "kind": "unidade", "lat": -23.5916, "lon": -46.6090, "item": "Seringas e agulhas", "demand_kg": 55, "priority": "regular", "deadline": "14:30", "service_min": 10, "cold_chain": false},
+    {"id": "E10", "name": "UPA Jabaquara", "kind": "unidade", "lat": -23.6465, "lon": -46.6410, "item": "Antiarrítmicos", "demand_kg": 15, "priority": "critica", "deadline": "10:00", "service_min": 10, "cold_chain": false},
+    {"id": "E11", "name": "Clínica Perdizes", "kind": "unidade", "lat": -23.5360, "lon": -46.6770, "item": "Insulina", "demand_kg": 12, "priority": "alta", "deadline": "11:30", "service_min": 10, "cold_chain": true},
+    {"id": "E12", "name": "Ambulatório Bela Vista", "kind": "unidade", "lat": -23.5610, "lon": -46.6470, "item": "Material de laboratório", "demand_kg": 40, "priority": "regular", "deadline": "15:30", "service_min": 10, "cold_chain": false},
+    {"id": "E13", "name": "UBS Liberdade", "kind": "unidade", "lat": -23.5590, "lon": -46.6320, "item": "Analgésicos e anti-inflamatórios", "demand_kg": 50, "priority": "alta", "deadline": "12:30", "service_min": 10, "cold_chain": false},
+    {"id": "E14", "name": "UBS Barra Funda", "kind": "unidade", "lat": -23.5260, "lon": -46.6660, "item": "EPIs", "demand_kg": 65, "priority": "regular", "deadline": "15:00", "service_min": 10, "cold_chain": false},
+    {"id": "E15", "name": "Domiciliar D01 (Vila Madalena)", "kind": "domiciliar", "lat": -23.5500, "lon": -46.6910, "item": "Kit de oxigenoterapia", "demand_kg": 20, "priority": "critica", "deadline": "10:00", "service_min": 20, "cold_chain": false},
+    {"id": "E16", "name": "Domiciliar D02 (Morumbi)", "kind": "domiciliar", "lat": -23.6010, "lon": -46.7220, "item": "Nutrição enteral", "demand_kg": 18, "priority": "alta", "deadline": "11:30", "service_min": 15, "cold_chain": false},
+    {"id": "E17", "name": "Domiciliar D03 (Campo Limpo)", "kind": "domiciliar", "lat": -23.6450, "lon": -46.7590, "item": "Insulina e curativos", "demand_kg": 6, "priority": "critica", "deadline": "10:30", "service_min": 15, "cold_chain": true},
+    {"id": "E18", "name": "UBS Penha", "kind": "unidade", "lat": -23.5260, "lon": -46.5430, "item": "Saneantes", "demand_kg": 85, "priority": "regular", "deadline": "15:30", "service_min": 10, "cold_chain": false},
+    {"id": "E19", "name": "UBS Vila Prudente", "kind": "unidade", "lat": -23.5830, "lon": -46.5800, "item": "Seringas e gaze", "demand_kg": 50, "priority": "regular", "deadline": "15:00", "service_min": 10, "cold_chain": false},
+    {"id": "E20", "name": "AMA Saúde", "kind": "unidade", "lat": -23.6180, "lon": -46.6390, "item": "Anticoagulantes", "demand_kg": 14, "priority": "alta", "deadline": "11:30", "service_min": 10, "cold_chain": false},
+    {"id": "E21", "name": "UBS Tucuruvi", "kind": "unidade", "lat": -23.4800, "lon": -46.6040, "item": "Material de curativo", "demand_kg": 60, "priority": "regular", "deadline": "15:30", "service_min": 10, "cold_chain": false},
+    {"id": "E22", "name": "Domiciliar D04 (Freguesia do Ó)", "kind": "domiciliar", "lat": -23.4960, "lon": -46.6960, "item": "Antibiótico oral e curativos", "demand_kg": 5, "priority": "alta", "deadline": "12:00", "service_min": 15, "cold_chain": false},
+    {"id": "E23", "name": "Clínica Brooklin", "kind": "unidade", "lat": -23.6110, "lon": -46.6960, "item": "Material cirúrgico", "demand_kg": 75, "priority": "regular", "deadline": "14:00", "service_min": 10, "cold_chain": false},
+    {"id": "E24", "name": "Domiciliar D05 (Butantã)", "kind": "domiciliar", "lat": -23.5710, "lon": -46.7080, "item": "Medicação oncológica oral", "demand_kg": 4, "priority": "critica", "deadline": "09:15", "service_min": 15, "cold_chain": false},
+    {"id": "E25", "name": "UPA Cidade Ademar", "kind": "unidade", "lat": -23.6740, "lon": -46.6570, "item": "Soros", "demand_kg": 120, "priority": "alta", "deadline": "12:30", "service_min": 15, "cold_chain": false},
+    {"id": "E26", "name": "UBS Carrão", "kind": "unidade", "lat": -23.5490, "lon": -46.5480, "item": "Insumos gerais", "demand_kg": 70, "priority": "regular", "deadline": null, "service_min": 10, "cold_chain": false},
+    {"id": "E27", "name": "Hospital-Dia Itaim", "kind": "unidade", "lat": -23.5850, "lon": -46.6760, "item": "Imunoglobulina", "demand_kg": 10, "priority": "critica", "deadline": "09:45", "service_min": 15, "cold_chain": true},
+    {"id": "E28", "name": "UBS Casa Verde", "kind": "unidade", "lat": -23.5060, "lon": -46.6560, "item": "Luvas", "demand_kg": 55, "priority": "regular", "deadline": "15:00", "service_min": 10, "cold_chain": false},
+    {"id": "E29", "name": "Domiciliar D06 (Jaguaré)", "kind": "domiciliar", "lat": -23.5460, "lon": -46.7480, "item": "Cateteres e sondas", "demand_kg": 8, "priority": "regular", "deadline": "14:00", "service_min": 15, "cold_chain": false},
+    {"id": "E30", "name": "UBS Sacomã", "kind": "unidade", "lat": -23.6040, "lon": -46.5990, "item": "Vacinas", "demand_kg": 16, "priority": "alta", "deadline": "11:30", "service_min": 10, "cold_chain": true}
+  ]
+}

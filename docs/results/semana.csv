@@ -1,0 +1,6 @@
+﻿date,weekday,deliveries,distance_km,reference_distance_km,critical_on_time_rate_pct
+2026-11-02,segunda-feira,26,221.4,381.2,100.0
+2026-11-03,terça-feira,25,218.2,350.0,100.0
+2026-11-04,quarta-feira,25,213.5,417.6,100.0
+2026-11-05,quinta-feira,24,224.7,390.1,100.0
+2026-11-06,sexta-feira,25,231.6,347.5,100.0

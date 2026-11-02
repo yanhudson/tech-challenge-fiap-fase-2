@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b18b1903a8ef0301068d584eaf769c3b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    <div style="position:fixed;bottom:24px;left:16px;z-index:9999;background:#fcfcfb;color:#0b0b0b;padding:10px 12px;border-radius:8px;box-shadow:0 1px 6px rgba(11,11,11,.25);font:12px system-ui,'Segoe UI',sans-serif;max-width:320px"><div style="font-weight:600;margin-bottom:4px">Algoritmo genético</div><div style="margin:2px 0"><span style="display:inline-block;width:18px;height:3px;background:#2a78d6;vertical-align:middle;margin-right:6px"></span>Fiorino refrigerada: 36,5 km, 5 paradas</div><div style="margin:2px 0"><span style="display:inline-block;width:18px;height:3px;background:#eb6834;vertical-align:middle;margin-right:6px"></span>Van refrigerada: 72,8 km, 9 paradas</div><div style="margin:2px 0"><span style="display:inline-block;width:18px;height:3px;background:#1baf7a;vertical-align:middle;margin-right:6px"></span>Van de carga: 65,3 km, 8 paradas</div><div style="margin:2px 0"><span style="display:inline-block;width:18px;height:3px;background:#eda100;vertical-align:middle;margin-right:6px"></span>Utilitário elétrico: 56,6 km, 6 paradas</div><div style="margin:2px 0"><span style="display:inline-block;width:18px;height:3px;background:#e87ba4;vertical-align:middle;margin-right:6px"></span>Moto de entrega: 15,2 km, 2 paradas</div><div style="margin-top:6px;color:#52514e">Total: 246,4 km | Críticas no prazo: 100,0%<br>CD é o centro de distribuição. O número indica a ordem da parada. Contorno escuro indica entrega crítica. As linhas ligam as paradas em reta e não seguem as ruas.</div></div>
+    
+            <div class="folium-map" id="map_b18b1903a8ef0301068d584eaf769c3b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b18b1903a8ef0301068d584eaf769c3b = L.map(
+                "map_b18b1903a8ef0301068d584eaf769c3b",
+                {
+                    center: [-23.569687096774192, -46.656064516129035],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9702ae4c522782e5cd9e0ac921515da9 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 0.45,
+}
+
+            );
+        
+    
+            tile_layer_9702ae4c522782e5cd9e0ac921515da9.addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var feature_group_c0746f045b9afab5029e3eb5041b2a26 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_1584308ea80a049133fb718a788918dd = L.polyline(
+                [[-23.5655, -46.7395], [-23.5206, -46.7036], [-23.536, -46.677], [-23.585, -46.676], [-23.601, -46.665], [-23.611, -46.696], [-23.5655, -46.7395]],
+                {"bubblingMouseEvents": true, "color": "#2a78d6", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2a78d6", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c0746f045b9afab5029e3eb5041b2a26);
+        
+    
+            poly_line_1584308ea80a049133fb718a788918dd.bindTooltip(
+                `<div>
+                     Fiorino refrigerada: 36,5 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_765071104db67bf9026387ed0ced6b31 = L.marker(
+                [-23.5206, -46.7036],
+                {
+}
+            ).addTo(feature_group_c0746f045b9afab5029e3eb5041b2a26);
+        
+    
+            var div_icon_5f5cd6719db039a9fcb42981cbf22176 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#2a78d6;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e1\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_f3f5af75f3ecdc73be3118c3ee40b064 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2e12a9b85937e055d8c7e03e1aa4ed69 = $(`<div id="html_2e12a9b85937e055d8c7e03e1aa4ed69" style="width: 100.0%; height: 100.0%;"><b>1. Hospital-Dia Lapa</b> (E02)<br>Veículo: Fiorino refrigerada<br>Item: Quimioterápicos (18.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 08:17 | Prazo: 09:30<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_f3f5af75f3ecdc73be3118c3ee40b064.setContent(html_2e12a9b85937e055d8c7e03e1aa4ed69);
+            
+        
+
+        marker_765071104db67bf9026387ed0ced6b31.bindPopup(popup_f3f5af75f3ecdc73be3118c3ee40b064)
+        ;
+
+        
+    
+    
+            marker_765071104db67bf9026387ed0ced6b31.bindTooltip(
+                `<div>
+                     1. Hospital-Dia Lapa (08:17)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_765071104db67bf9026387ed0ced6b31.setIcon(div_icon_5f5cd6719db039a9fcb42981cbf22176);
+            
+    
+            var marker_8c355a3c3167d005db834ab2c658bef4 = L.marker(
+                [-23.536, -46.677],
+                {
+}
+            ).addTo(feature_group_c0746f045b9afab5029e3eb5041b2a26);
+        
+    
+            var div_icon_c9e7fba3dfda50d2e8a1280173f08e49 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#2a78d6;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e2\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_054229d1ecf7a2d121793b697b9569dc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_82f356abc8f16136efdd4b319d838d12 = $(`<div id="html_82f356abc8f16136efdd4b319d838d12" style="width: 100.0%; height: 100.0%;"><b>2. Clínica Perdizes</b> (E11)<br>Veículo: Fiorino refrigerada<br>Item: Insulina (12.0 kg)<br>Prioridade: alta<br>Chegada prevista: 08:40 | Prazo: 11:30<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_054229d1ecf7a2d121793b697b9569dc.setContent(html_82f356abc8f16136efdd4b319d838d12);
+            
+        
+
+        marker_8c355a3c3167d005db834ab2c658bef4.bindPopup(popup_054229d1ecf7a2d121793b697b9569dc)
+        ;
+
+        
+    
+    
+            marker_8c355a3c3167d005db834ab2c658bef4.bindTooltip(
+                `<div>
+                     2. Clínica Perdizes (08:40)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8c355a3c3167d005db834ab2c658bef4.setIcon(div_icon_c9e7fba3dfda50d2e8a1280173f08e49);
+            
+    
+            var marker_59aa22e0984037cba7745f85266e81b4 = L.marker(
+                [-23.585, -46.676],
+                {
+}
+            ).addTo(feature_group_c0746f045b9afab5029e3eb5041b2a26);
+        
+    
+            var div_icon_bb292d965fefd184029a670e7190d3c4 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#2a78d6;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e3\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_7e2ad6f0cce5b0b26086e24f0ca11b6e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c7ab95aac1a2175b65601b3d90cdb48e = $(`<div id="html_c7ab95aac1a2175b65601b3d90cdb48e" style="width: 100.0%; height: 100.0%;"><b>3. Hospital-Dia Itaim</b> (E27)<br>Veículo: Fiorino refrigerada<br>Item: Imunoglobulina (10.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 09:05 | Prazo: 09:45<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_7e2ad6f0cce5b0b26086e24f0ca11b6e.setContent(html_c7ab95aac1a2175b65601b3d90cdb48e);
+            
+        
+
+        marker_59aa22e0984037cba7745f85266e81b4.bindPopup(popup_7e2ad6f0cce5b0b26086e24f0ca11b6e)
+        ;
+
+        
+    
+    
+            marker_59aa22e0984037cba7745f85266e81b4.bindTooltip(
+                `<div>
+                     3. Hospital-Dia Itaim (09:05)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_59aa22e0984037cba7745f85266e81b4.setIcon(div_icon_bb292d965fefd184029a670e7190d3c4);
+            
+    
+            var marker_897e6d32993aef9313638413a3b506c2 = L.marker(
+                [-23.601, -46.665],
+                {
+}
+            ).addTo(feature_group_c0746f045b9afab5029e3eb5041b2a26);
+        
+    
+            var div_icon_324572c0978646f9e02e2845ef0c09c0 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#2a78d6;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e4\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_83c5bdd7836288d0be8c8be93dad2f5a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ff5eae491a37656e807611e9586eec7a = $(`<div id="html_ff5eae491a37656e807611e9586eec7a" style="width: 100.0%; height: 100.0%;"><b>4. UBS Moema</b> (E05)<br>Veículo: Fiorino refrigerada<br>Item: Vacinas (20.0 kg)<br>Prioridade: alta<br>Chegada prevista: 09:26 | Prazo: 11:00<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_83c5bdd7836288d0be8c8be93dad2f5a.setContent(html_ff5eae491a37656e807611e9586eec7a);
+            
+        
+
+        marker_897e6d32993aef9313638413a3b506c2.bindPopup(popup_83c5bdd7836288d0be8c8be93dad2f5a)
+        ;
+
+        
+    
+    
+            marker_897e6d32993aef9313638413a3b506c2.bindTooltip(
+                `<div>
+                     4. UBS Moema (09:26)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_897e6d32993aef9313638413a3b506c2.setIcon(div_icon_324572c0978646f9e02e2845ef0c09c0);
+            
+    
+            var marker_897fad4512cff98d8140f31628e9e8b7 = L.marker(
+                [-23.611, -46.696],
+                {
+}
+            ).addTo(feature_group_c0746f045b9afab5029e3eb5041b2a26);
+        
+    
+            var div_icon_177df130e442cefff45a3bc8129bd00f = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#2a78d6;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e5\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_bc962c657df98e1514b2f075f3b95f19 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7c4619d090462cb4fbbd8f066ee153c7 = $(`<div id="html_7c4619d090462cb4fbbd8f066ee153c7" style="width: 100.0%; height: 100.0%;"><b>5. Clínica Brooklin</b> (E23)<br>Veículo: Fiorino refrigerada<br>Item: Material cirúrgico (75.0 kg)<br>Prioridade: regular<br>Chegada prevista: 09:45 | Prazo: 14:00</div>`)[0];
+                popup_bc962c657df98e1514b2f075f3b95f19.setContent(html_7c4619d090462cb4fbbd8f066ee153c7);
+            
+        
+
+        marker_897fad4512cff98d8140f31628e9e8b7.bindPopup(popup_bc962c657df98e1514b2f075f3b95f19)
+        ;
+
+        
+    
+    
+            marker_897fad4512cff98d8140f31628e9e8b7.bindTooltip(
+                `<div>
+                     5. Clínica Brooklin (09:45)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_897fad4512cff98d8140f31628e9e8b7.setIcon(div_icon_177df130e442cefff45a3bc8129bd00f);
+            
+    
+            feature_group_c0746f045b9afab5029e3eb5041b2a26.addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var feature_group_636263de02787a38840f834ad26a592f = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_bbe9b5f6648e06c7140f5af333e1c1d0 = L.polyline(
+                [[-23.5655, -46.7395], [-23.645, -46.759], [-23.6548, -46.7097], [-23.674, -46.657], [-23.604, -46.599], [-23.583, -46.58], [-23.559, -46.599], [-23.5916, -46.609], [-23.5893, -46.6345], [-23.5615, -46.6914], [-23.5655, -46.7395]],
+                {"bubblingMouseEvents": true, "color": "#eb6834", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#eb6834", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            poly_line_bbe9b5f6648e06c7140f5af333e1c1d0.bindTooltip(
+                `<div>
+                     Van refrigerada: 72,8 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d93c53d528cd38e497cd85ab0b146570 = L.marker(
+                [-23.645, -46.759],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_0db6c1f970427a7f41601fb2b3a9e268 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e1\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_cd3998147e0d43fff62e7480ae572eca = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_22f880bfa45b8e8bce86235f893369f3 = $(`<div id="html_22f880bfa45b8e8bce86235f893369f3" style="width: 100.0%; height: 100.0%;"><b>1. Domiciliar D03 (Campo Limpo)</b> (E17)<br>Veículo: Van refrigerada<br>Item: Insulina e curativos (6.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 08:26 | Prazo: 10:30<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_cd3998147e0d43fff62e7480ae572eca.setContent(html_22f880bfa45b8e8bce86235f893369f3);
+            
+        
+
+        marker_d93c53d528cd38e497cd85ab0b146570.bindPopup(popup_cd3998147e0d43fff62e7480ae572eca)
+        ;
+
+        
+    
+    
+            marker_d93c53d528cd38e497cd85ab0b146570.bindTooltip(
+                `<div>
+                     1. Domiciliar D03 (Campo Limpo) (08:26)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d93c53d528cd38e497cd85ab0b146570.setIcon(div_icon_0db6c1f970427a7f41601fb2b3a9e268);
+            
+    
+            var marker_412a8f96fe41931a2359f095a939c9a5 = L.marker(
+                [-23.6548, -46.7097],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_44ac1a8bbebae88b6dbe5045fadde7b8 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e2\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_30279ed541d99d649eec71cc4ceec982 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_cd9c7a59b0481bb0746e6d1c80cb341b = $(`<div id="html_cd9c7a59b0481bb0746e6d1c80cb341b" style="width: 100.0%; height: 100.0%;"><b>2. Pronto-Socorro Santo Amaro</b> (E04)<br>Veículo: Van refrigerada<br>Item: Hemoderivados (25.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 08:56 | Prazo: 09:45<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_30279ed541d99d649eec71cc4ceec982.setContent(html_cd9c7a59b0481bb0746e6d1c80cb341b);
+            
+        
+
+        marker_412a8f96fe41931a2359f095a939c9a5.bindPopup(popup_30279ed541d99d649eec71cc4ceec982)
+        ;
+
+        
+    
+    
+            marker_412a8f96fe41931a2359f095a939c9a5.bindTooltip(
+                `<div>
+                     2. Pronto-Socorro Santo Amaro (08:56)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_412a8f96fe41931a2359f095a939c9a5.setIcon(div_icon_44ac1a8bbebae88b6dbe5045fadde7b8);
+            
+    
+            var marker_fb23d8b312982c490a41e3c643c9e9b0 = L.marker(
+                [-23.674, -46.657],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_efd0b7839c087bdaeced38131a5e4608 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e3\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_c527e93a217de49b506ed9c8a6d13eb7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ba562c9cb1e96eb0a6c90cc242f124ce = $(`<div id="html_ba562c9cb1e96eb0a6c90cc242f124ce" style="width: 100.0%; height: 100.0%;"><b>3. UPA Cidade Ademar</b> (E25)<br>Veículo: Van refrigerada<br>Item: Soros (120.0 kg)<br>Prioridade: alta<br>Chegada prevista: 09:28 | Prazo: 12:30</div>`)[0];
+                popup_c527e93a217de49b506ed9c8a6d13eb7.setContent(html_ba562c9cb1e96eb0a6c90cc242f124ce);
+            
+        
+
+        marker_fb23d8b312982c490a41e3c643c9e9b0.bindPopup(popup_c527e93a217de49b506ed9c8a6d13eb7)
+        ;
+
+        
+    
+    
+            marker_fb23d8b312982c490a41e3c643c9e9b0.bindTooltip(
+                `<div>
+                     3. UPA Cidade Ademar (09:28)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fb23d8b312982c490a41e3c643c9e9b0.setIcon(div_icon_efd0b7839c087bdaeced38131a5e4608);
+            
+    
+            var marker_f43d77059078997cba89bb4543c55e72 = L.marker(
+                [-23.604, -46.599],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_6dcccd305947c32faa9c465ef9cec6eb = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e4\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_db2ab0a2e42995376381986429ea5566 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a5322a679e9b07452f2b86d07c583bfe = $(`<div id="html_a5322a679e9b07452f2b86d07c583bfe" style="width: 100.0%; height: 100.0%;"><b>4. UBS Sacomã</b> (E30)<br>Veículo: Van refrigerada<br>Item: Vacinas (16.0 kg)<br>Prioridade: alta<br>Chegada prevista: 10:11 | Prazo: 11:30<br>Cadeia fria: manter refrigerado</div>`)[0];
+                popup_db2ab0a2e42995376381986429ea5566.setContent(html_a5322a679e9b07452f2b86d07c583bfe);
+            
+        
+
+        marker_f43d77059078997cba89bb4543c55e72.bindPopup(popup_db2ab0a2e42995376381986429ea5566)
+        ;
+
+        
+    
+    
+            marker_f43d77059078997cba89bb4543c55e72.bindTooltip(
+                `<div>
+                     4. UBS Sacomã (10:11)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f43d77059078997cba89bb4543c55e72.setIcon(div_icon_6dcccd305947c32faa9c465ef9cec6eb);
+            
+    
+            var marker_a597a8d3caa832c811453d620a1bd4d1 = L.marker(
+                [-23.583, -46.58],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_43fd6cb9ff6f27b76530ce28b80b702a = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e5\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_c1cbe304622080796dd6f031ff3826a2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fd34599e54f8600b55bcbd62bd03cb2c = $(`<div id="html_fd34599e54f8600b55bcbd62bd03cb2c" style="width: 100.0%; height: 100.0%;"><b>5. UBS Vila Prudente</b> (E19)<br>Veículo: Van refrigerada<br>Item: Seringas e gaze (50.0 kg)<br>Prioridade: regular<br>Chegada prevista: 10:30 | Prazo: 15:00</div>`)[0];
+                popup_c1cbe304622080796dd6f031ff3826a2.setContent(html_fd34599e54f8600b55bcbd62bd03cb2c);
+            
+        
+
+        marker_a597a8d3caa832c811453d620a1bd4d1.bindPopup(popup_c1cbe304622080796dd6f031ff3826a2)
+        ;
+
+        
+    
+    
+            marker_a597a8d3caa832c811453d620a1bd4d1.bindTooltip(
+                `<div>
+                     5. UBS Vila Prudente (10:30)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a597a8d3caa832c811453d620a1bd4d1.setIcon(div_icon_43fd6cb9ff6f27b76530ce28b80b702a);
+            
+    
+            var marker_f2ba3bcd7100f10e9e1980941e73f24c = L.marker(
+                [-23.559, -46.599],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_14ed0de4efc44c524204d87c5480eae0 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e6\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_ce3ee678422efec57ca75df84266c4f7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f33359762d84f9f4ee9fa25aaf553d81 = $(`<div id="html_f33359762d84f9f4ee9fa25aaf553d81" style="width: 100.0%; height: 100.0%;"><b>6. UBS Mooca</b> (E07)<br>Veículo: Van refrigerada<br>Item: Material de curativo (60.0 kg)<br>Prioridade: regular<br>Chegada prevista: 10:49 | Prazo: 15:00</div>`)[0];
+                popup_ce3ee678422efec57ca75df84266c4f7.setContent(html_f33359762d84f9f4ee9fa25aaf553d81);
+            
+        
+
+        marker_f2ba3bcd7100f10e9e1980941e73f24c.bindPopup(popup_ce3ee678422efec57ca75df84266c4f7)
+        ;
+
+        
+    
+    
+            marker_f2ba3bcd7100f10e9e1980941e73f24c.bindTooltip(
+                `<div>
+                     6. UBS Mooca (10:49)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f2ba3bcd7100f10e9e1980941e73f24c.setIcon(div_icon_14ed0de4efc44c524204d87c5480eae0);
+            
+    
+            var marker_f098ac2b149bdc09a6691697bd6f18e7 = L.marker(
+                [-23.5916, -46.609],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_0df90ea32a782148a3d9cbc6f4792622 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e7\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_77677b6df9bf96136db4b4e879dcf5ec = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1cbe177521712e150b3f3aee4cb683d4 = $(`<div id="html_1cbe177521712e150b3f3aee4cb683d4" style="width: 100.0%; height: 100.0%;"><b>7. UBS Ipiranga</b> (E09)<br>Veículo: Van refrigerada<br>Item: Seringas e agulhas (55.0 kg)<br>Prioridade: regular<br>Chegada prevista: 11:10 | Prazo: 14:30</div>`)[0];
+                popup_77677b6df9bf96136db4b4e879dcf5ec.setContent(html_1cbe177521712e150b3f3aee4cb683d4);
+            
+        
+
+        marker_f098ac2b149bdc09a6691697bd6f18e7.bindPopup(popup_77677b6df9bf96136db4b4e879dcf5ec)
+        ;
+
+        
+    
+    
+            marker_f098ac2b149bdc09a6691697bd6f18e7.bindTooltip(
+                `<div>
+                     7. UBS Ipiranga (11:10)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f098ac2b149bdc09a6691697bd6f18e7.setIcon(div_icon_0df90ea32a782148a3d9cbc6f4792622);
+            
+    
+            var marker_3fbef417c79f56115902560c5e638aec = L.marker(
+                [-23.5893, -46.6345],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_5e0c35506a54a2f5d765c02072b5fdcb = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e8\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_1c99f6b9db28283e452d568680761074 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b4ed72dfbffb3f6f5751ee6ae9498c82 = $(`<div id="html_b4ed72dfbffb3f6f5751ee6ae9498c82" style="width: 100.0%; height: 100.0%;"><b>8. AMA Vila Mariana</b> (E03)<br>Veículo: Van refrigerada<br>Item: Luvas e EPIs (70.0 kg)<br>Prioridade: regular<br>Chegada prevista: 11:28 | Prazo: 14:00</div>`)[0];
+                popup_1c99f6b9db28283e452d568680761074.setContent(html_b4ed72dfbffb3f6f5751ee6ae9498c82);
+            
+        
+
+        marker_3fbef417c79f56115902560c5e638aec.bindPopup(popup_1c99f6b9db28283e452d568680761074)
+        ;
+
+        
+    
+    
+            marker_3fbef417c79f56115902560c5e638aec.bindTooltip(
+                `<div>
+                     8. AMA Vila Mariana (11:28)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3fbef417c79f56115902560c5e638aec.setIcon(div_icon_5e0c35506a54a2f5d765c02072b5fdcb);
+            
+    
+            var marker_25d3dd43fe95f0e5768fc2d2287f1e7f = L.marker(
+                [-23.5615, -46.6914],
+                {
+}
+            ).addTo(feature_group_636263de02787a38840f834ad26a592f);
+        
+    
+            var div_icon_4792438fbbd15aa6b2d8ad66e0ece730 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eb6834;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e9\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_880f70d1c3921ad9164c24c74c7be91d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c1fec13b7fd509ee0c9cbf26f8a458c4 = $(`<div id="html_c1fec13b7fd509ee0c9cbf26f8a458c4" style="width: 100.0%; height: 100.0%;"><b>9. UBS Pinheiros</b> (E01)<br>Veículo: Van refrigerada<br>Item: Material de curativo (45.0 kg)<br>Prioridade: regular<br>Chegada prevista: 11:57 | Prazo: 15:00</div>`)[0];
+                popup_880f70d1c3921ad9164c24c74c7be91d.setContent(html_c1fec13b7fd509ee0c9cbf26f8a458c4);
+            
+        
+
+        marker_25d3dd43fe95f0e5768fc2d2287f1e7f.bindPopup(popup_880f70d1c3921ad9164c24c74c7be91d)
+        ;
+
+        
+    
+    
+            marker_25d3dd43fe95f0e5768fc2d2287f1e7f.bindTooltip(
+                `<div>
+                     9. UBS Pinheiros (11:57)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_25d3dd43fe95f0e5768fc2d2287f1e7f.setIcon(div_icon_4792438fbbd15aa6b2d8ad66e0ece730);
+            
+    
+            feature_group_636263de02787a38840f834ad26a592f.addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var feature_group_af34de58722e66ae07f6ee616aa04d28 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_6c248b102292b7fe605501f9fc535f43 = L.polyline(
+                [[-23.5655, -46.7395], [-23.55, -46.691], [-23.559, -46.632], [-23.5405, -46.5763], [-23.549, -46.548], [-23.526, -46.543], [-23.48, -46.604], [-23.503, -46.625], [-23.506, -46.656], [-23.5655, -46.7395]],
+                {"bubblingMouseEvents": true, "color": "#1baf7a", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#1baf7a", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            poly_line_6c248b102292b7fe605501f9fc535f43.bindTooltip(
+                `<div>
+                     Van de carga: 65,3 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b20e6e71714734ee5a4a5927f1337800 = L.marker(
+                [-23.55, -46.691],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_9c193362e16efafbf8ef8317d30354f1 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e1\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_823ac91aa57df73bbaee9c4c8be03f4a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a90d7e7a18de70a295a7b503249883e5 = $(`<div id="html_a90d7e7a18de70a295a7b503249883e5" style="width: 100.0%; height: 100.0%;"><b>1. Domiciliar D01 (Vila Madalena)</b> (E15)<br>Veículo: Van de carga<br>Item: Kit de oxigenoterapia (20.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 08:15 | Prazo: 10:00</div>`)[0];
+                popup_823ac91aa57df73bbaee9c4c8be03f4a.setContent(html_a90d7e7a18de70a295a7b503249883e5);
+            
+        
+
+        marker_b20e6e71714734ee5a4a5927f1337800.bindPopup(popup_823ac91aa57df73bbaee9c4c8be03f4a)
+        ;
+
+        
+    
+    
+            marker_b20e6e71714734ee5a4a5927f1337800.bindTooltip(
+                `<div>
+                     1. Domiciliar D01 (Vila Madalena) (08:15)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b20e6e71714734ee5a4a5927f1337800.setIcon(div_icon_9c193362e16efafbf8ef8317d30354f1);
+            
+    
+            var marker_fcfff7b47a17a9244c6f982fa46ad08a = L.marker(
+                [-23.559, -46.632],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_71926787a3bce747ab229703c5c3b38f = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e2\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_75a2d3dbdf1bc73bce8a5d3997c3a0cf = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_303e0ce847ffd96cbb145092f2579295 = $(`<div id="html_303e0ce847ffd96cbb145092f2579295" style="width: 100.0%; height: 100.0%;"><b>2. UBS Liberdade</b> (E13)<br>Veículo: Van de carga<br>Item: Analgésicos e anti-inflamatórios (50.0 kg)<br>Prioridade: alta<br>Chegada prevista: 08:53 | Prazo: 12:30</div>`)[0];
+                popup_75a2d3dbdf1bc73bce8a5d3997c3a0cf.setContent(html_303e0ce847ffd96cbb145092f2579295);
+            
+        
+
+        marker_fcfff7b47a17a9244c6f982fa46ad08a.bindPopup(popup_75a2d3dbdf1bc73bce8a5d3997c3a0cf)
+        ;
+
+        
+    
+    
+            marker_fcfff7b47a17a9244c6f982fa46ad08a.bindTooltip(
+                `<div>
+                     2. UBS Liberdade (08:53)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fcfff7b47a17a9244c6f982fa46ad08a.setIcon(div_icon_71926787a3bce747ab229703c5c3b38f);
+            
+    
+            var marker_b3e1eb81a32cf7e7090b512073b360a1 = L.marker(
+                [-23.5405, -46.5763],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_9ead5828ab7f05b7fc2eabe834e3c2a6 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e3\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_b3b4af862d25ddd749f65d5d321901b7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_99858898af6d7c0c0d69870d59d122db = $(`<div id="html_99858898af6d7c0c0d69870d59d122db" style="width: 100.0%; height: 100.0%;"><b>3. Hospital-Dia Tatuapé</b> (E06)<br>Veículo: Van de carga<br>Item: Antibióticos injetáveis (35.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 09:20 | Prazo: 10:30</div>`)[0];
+                popup_b3b4af862d25ddd749f65d5d321901b7.setContent(html_99858898af6d7c0c0d69870d59d122db);
+            
+        
+
+        marker_b3e1eb81a32cf7e7090b512073b360a1.bindPopup(popup_b3b4af862d25ddd749f65d5d321901b7)
+        ;
+
+        
+    
+    
+            marker_b3e1eb81a32cf7e7090b512073b360a1.bindTooltip(
+                `<div>
+                     3. Hospital-Dia Tatuapé (09:20)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b3e1eb81a32cf7e7090b512073b360a1.setIcon(div_icon_9ead5828ab7f05b7fc2eabe834e3c2a6);
+            
+    
+            var marker_12425c68a0f1b62e49d54e89ed2b24e6 = L.marker(
+                [-23.549, -46.548],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_6d8b50369c7ef99b673047038230460a = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e4\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_c31a6cf3686178fe6802f2e5c1c965cd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_38f4163aca2adee09e6fd3c4e307437a = $(`<div id="html_38f4163aca2adee09e6fd3c4e307437a" style="width: 100.0%; height: 100.0%;"><b>4. UBS Carrão</b> (E26)<br>Veículo: Van de carga<br>Item: Insumos gerais (70.0 kg)<br>Prioridade: regular<br>Chegada prevista: 09:44 | Prazo: sem prazo</div>`)[0];
+                popup_c31a6cf3686178fe6802f2e5c1c965cd.setContent(html_38f4163aca2adee09e6fd3c4e307437a);
+            
+        
+
+        marker_12425c68a0f1b62e49d54e89ed2b24e6.bindPopup(popup_c31a6cf3686178fe6802f2e5c1c965cd)
+        ;
+
+        
+    
+    
+            marker_12425c68a0f1b62e49d54e89ed2b24e6.bindTooltip(
+                `<div>
+                     4. UBS Carrão (09:44)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_12425c68a0f1b62e49d54e89ed2b24e6.setIcon(div_icon_6d8b50369c7ef99b673047038230460a);
+            
+    
+            var marker_f55400012e1bcceb8d0c37107d3f8bd8 = L.marker(
+                [-23.526, -46.543],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_13b501857a7444c2bdff0b9f4422e47e = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e5\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_a145bfee5700e3a3f8af5e560444cbfd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ac8dd75448c1166b293ce36e57d8e54d = $(`<div id="html_ac8dd75448c1166b293ce36e57d8e54d" style="width: 100.0%; height: 100.0%;"><b>5. UBS Penha</b> (E18)<br>Veículo: Van de carga<br>Item: Saneantes (85.0 kg)<br>Prioridade: regular<br>Chegada prevista: 10:02 | Prazo: 15:30</div>`)[0];
+                popup_a145bfee5700e3a3f8af5e560444cbfd.setContent(html_ac8dd75448c1166b293ce36e57d8e54d);
+            
+        
+
+        marker_f55400012e1bcceb8d0c37107d3f8bd8.bindPopup(popup_a145bfee5700e3a3f8af5e560444cbfd)
+        ;
+
+        
+    
+    
+            marker_f55400012e1bcceb8d0c37107d3f8bd8.bindTooltip(
+                `<div>
+                     5. UBS Penha (10:02)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f55400012e1bcceb8d0c37107d3f8bd8.setIcon(div_icon_13b501857a7444c2bdff0b9f4422e47e);
+            
+    
+            var marker_f00fa1fc07f2ce311831a55b28e7372a = L.marker(
+                [-23.48, -46.604],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_8ab825678f1644177d984f05b3753020 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e6\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_371453233dee2e1886cc9073e1736e90 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4f74e89732e7bbe42699dddbf471e7a3 = $(`<div id="html_4f74e89732e7bbe42699dddbf471e7a3" style="width: 100.0%; height: 100.0%;"><b>6. UBS Tucuruvi</b> (E21)<br>Veículo: Van de carga<br>Item: Material de curativo (60.0 kg)<br>Prioridade: regular<br>Chegada prevista: 10:35 | Prazo: 15:30</div>`)[0];
+                popup_371453233dee2e1886cc9073e1736e90.setContent(html_4f74e89732e7bbe42699dddbf471e7a3);
+            
+        
+
+        marker_f00fa1fc07f2ce311831a55b28e7372a.bindPopup(popup_371453233dee2e1886cc9073e1736e90)
+        ;
+
+        
+    
+    
+            marker_f00fa1fc07f2ce311831a55b28e7372a.bindTooltip(
+                `<div>
+                     6. UBS Tucuruvi (10:35)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f00fa1fc07f2ce311831a55b28e7372a.setIcon(div_icon_8ab825678f1644177d984f05b3753020);
+            
+    
+            var marker_1a6a66488f4db75594663bd628e59cb4 = L.marker(
+                [-23.503, -46.625],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_c7f55bc54e07658c72b34f0249d8da1b = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e7\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_8f562ba751f8ab9cd88616424060d9e0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_18a7fb411c3cd8da1d3ab7c5eb7e2ac0 = $(`<div id="html_18a7fb411c3cd8da1d3ab7c5eb7e2ac0" style="width: 100.0%; height: 100.0%;"><b>7. AMA Santana</b> (E08)<br>Veículo: Van de carga<br>Item: Soros e eletrólitos (110.0 kg)<br>Prioridade: alta<br>Chegada prevista: 10:55 | Prazo: 12:00</div>`)[0];
+                popup_8f562ba751f8ab9cd88616424060d9e0.setContent(html_18a7fb411c3cd8da1d3ab7c5eb7e2ac0);
+            
+        
+
+        marker_1a6a66488f4db75594663bd628e59cb4.bindPopup(popup_8f562ba751f8ab9cd88616424060d9e0)
+        ;
+
+        
+    
+    
+            marker_1a6a66488f4db75594663bd628e59cb4.bindTooltip(
+                `<div>
+                     7. AMA Santana (10:55)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1a6a66488f4db75594663bd628e59cb4.setIcon(div_icon_c7f55bc54e07658c72b34f0249d8da1b);
+            
+    
+            var marker_f5a20e01354b5854259a1f9587db46e2 = L.marker(
+                [-23.506, -46.656],
+                {
+}
+            ).addTo(feature_group_af34de58722e66ae07f6ee616aa04d28);
+        
+    
+            var div_icon_76eef3cf51a513cdf28cacd758e69d18 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#1baf7a;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e8\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_74691469606f21dd41699f82dd8dffc4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_55b66e726ea603a0cde34c287bbc5fe6 = $(`<div id="html_55b66e726ea603a0cde34c287bbc5fe6" style="width: 100.0%; height: 100.0%;"><b>8. UBS Casa Verde</b> (E28)<br>Veículo: Van de carga<br>Item: Luvas (55.0 kg)<br>Prioridade: regular<br>Chegada prevista: 11:19 | Prazo: 15:00</div>`)[0];
+                popup_74691469606f21dd41699f82dd8dffc4.setContent(html_55b66e726ea603a0cde34c287bbc5fe6);
+            
+        
+
+        marker_f5a20e01354b5854259a1f9587db46e2.bindPopup(popup_74691469606f21dd41699f82dd8dffc4)
+        ;
+
+        
+    
+    
+            marker_f5a20e01354b5854259a1f9587db46e2.bindTooltip(
+                `<div>
+                     8. UBS Casa Verde (11:19)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f5a20e01354b5854259a1f9587db46e2.setIcon(div_icon_76eef3cf51a513cdf28cacd758e69d18);
+            
+    
+            feature_group_af34de58722e66ae07f6ee616aa04d28.addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var feature_group_e7408e7b7fbff38025361142758f4bdf = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_bdbe5e5dd33a104de5987af77c4dcc0d = L.polyline(
+                [[-23.5655, -46.7395], [-23.6465, -46.641], [-23.618, -46.639], [-23.561, -46.647], [-23.526, -46.666], [-23.496, -46.696], [-23.546, -46.748], [-23.5655, -46.7395]],
+                {"bubblingMouseEvents": true, "color": "#eda100", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#eda100", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            poly_line_bdbe5e5dd33a104de5987af77c4dcc0d.bindTooltip(
+                `<div>
+                     Utilitário elétrico: 56,6 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1309c7abb31ee57a6e80cbdd47880fd6 = L.marker(
+                [-23.6465, -46.641],
+                {
+}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            var div_icon_7ff3ea90513611fa45558d288a7161ee = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eda100;color:#0b0b0b;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e1\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_94e7cc1afa19deb9bf840fa5fac37fed = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e47dbf9da9b80a1a09c7b09861d06d42 = $(`<div id="html_e47dbf9da9b80a1a09c7b09861d06d42" style="width: 100.0%; height: 100.0%;"><b>1. UPA Jabaquara</b> (E10)<br>Veículo: Utilitário elétrico<br>Item: Antiarrítmicos (15.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 08:36 | Prazo: 10:00</div>`)[0];
+                popup_94e7cc1afa19deb9bf840fa5fac37fed.setContent(html_e47dbf9da9b80a1a09c7b09861d06d42);
+            
+        
+
+        marker_1309c7abb31ee57a6e80cbdd47880fd6.bindPopup(popup_94e7cc1afa19deb9bf840fa5fac37fed)
+        ;
+
+        
+    
+    
+            marker_1309c7abb31ee57a6e80cbdd47880fd6.bindTooltip(
+                `<div>
+                     1. UPA Jabaquara (08:36)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1309c7abb31ee57a6e80cbdd47880fd6.setIcon(div_icon_7ff3ea90513611fa45558d288a7161ee);
+            
+    
+            var marker_53e68ecd4f52542082e5046a4cb12208 = L.marker(
+                [-23.618, -46.639],
+                {
+}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            var div_icon_91d4a9efa219a368da158103431594e8 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eda100;color:#0b0b0b;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e2\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_0dbf156330f2c233901693011f9b19c1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_78f9877249f977f9be85627d9258fdb5 = $(`<div id="html_78f9877249f977f9be85627d9258fdb5" style="width: 100.0%; height: 100.0%;"><b>2. AMA Saúde</b> (E20)<br>Veículo: Utilitário elétrico<br>Item: Anticoagulantes (14.0 kg)<br>Prioridade: alta<br>Chegada prevista: 08:55 | Prazo: 11:30</div>`)[0];
+                popup_0dbf156330f2c233901693011f9b19c1.setContent(html_78f9877249f977f9be85627d9258fdb5);
+            
+        
+
+        marker_53e68ecd4f52542082e5046a4cb12208.bindPopup(popup_0dbf156330f2c233901693011f9b19c1)
+        ;
+
+        
+    
+    
+            marker_53e68ecd4f52542082e5046a4cb12208.bindTooltip(
+                `<div>
+                     2. AMA Saúde (08:55)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53e68ecd4f52542082e5046a4cb12208.setIcon(div_icon_91d4a9efa219a368da158103431594e8);
+            
+    
+            var marker_182051196ea12324eb55c92233213e52 = L.marker(
+                [-23.561, -46.647],
+                {
+}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            var div_icon_fd119dabcdd4ee8a9735858c1b58c3a3 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eda100;color:#0b0b0b;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e3\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_c82b6efe7f9d31291ce8df074d5e3313 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_83f9054e83b9fed6435101d29066acfe = $(`<div id="html_83f9054e83b9fed6435101d29066acfe" style="width: 100.0%; height: 100.0%;"><b>3. Ambulatório Bela Vista</b> (E12)<br>Veículo: Utilitário elétrico<br>Item: Material de laboratório (40.0 kg)<br>Prioridade: regular<br>Chegada prevista: 09:22 | Prazo: 15:30</div>`)[0];
+                popup_c82b6efe7f9d31291ce8df074d5e3313.setContent(html_83f9054e83b9fed6435101d29066acfe);
+            
+        
+
+        marker_182051196ea12324eb55c92233213e52.bindPopup(popup_c82b6efe7f9d31291ce8df074d5e3313)
+        ;
+
+        
+    
+    
+            marker_182051196ea12324eb55c92233213e52.bindTooltip(
+                `<div>
+                     3. Ambulatório Bela Vista (09:22)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_182051196ea12324eb55c92233213e52.setIcon(div_icon_fd119dabcdd4ee8a9735858c1b58c3a3);
+            
+    
+            var marker_240e7a7f8750539278e8e5d8da461d95 = L.marker(
+                [-23.526, -46.666],
+                {
+}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            var div_icon_3f66e212e71ca63035f4fa9c0ea39ba5 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eda100;color:#0b0b0b;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e4\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_e0ccce1ac10c471fa478459dbd6d9ca1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_51ffc69da1bea5d4247c10908cf4f3b6 = $(`<div id="html_51ffc69da1bea5d4247c10908cf4f3b6" style="width: 100.0%; height: 100.0%;"><b>4. UBS Barra Funda</b> (E14)<br>Veículo: Utilitário elétrico<br>Item: EPIs (65.0 kg)<br>Prioridade: regular<br>Chegada prevista: 09:44 | Prazo: 15:00</div>`)[0];
+                popup_e0ccce1ac10c471fa478459dbd6d9ca1.setContent(html_51ffc69da1bea5d4247c10908cf4f3b6);
+            
+        
+
+        marker_240e7a7f8750539278e8e5d8da461d95.bindPopup(popup_e0ccce1ac10c471fa478459dbd6d9ca1)
+        ;
+
+        
+    
+    
+            marker_240e7a7f8750539278e8e5d8da461d95.bindTooltip(
+                `<div>
+                     4. UBS Barra Funda (09:44)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_240e7a7f8750539278e8e5d8da461d95.setIcon(div_icon_3f66e212e71ca63035f4fa9c0ea39ba5);
+            
+    
+            var marker_58640361825a950c1bed193c132d1a78 = L.marker(
+                [-23.496, -46.696],
+                {
+}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            var div_icon_994aa3172e06d92ec204e238da450ce9 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eda100;color:#0b0b0b;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e5\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_645239b21eae86cd3615a0da2414d605 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9dd25b555aa8f304a89e28734b2083dd = $(`<div id="html_9dd25b555aa8f304a89e28734b2083dd" style="width: 100.0%; height: 100.0%;"><b>5. Domiciliar D04 (Freguesia do Ó)</b> (E22)<br>Veículo: Utilitário elétrico<br>Item: Antibiótico oral e curativos (5.0 kg)<br>Prioridade: alta<br>Chegada prevista: 10:06 | Prazo: 12:00</div>`)[0];
+                popup_645239b21eae86cd3615a0da2414d605.setContent(html_9dd25b555aa8f304a89e28734b2083dd);
+            
+        
+
+        marker_58640361825a950c1bed193c132d1a78.bindPopup(popup_645239b21eae86cd3615a0da2414d605)
+        ;
+
+        
+    
+    
+            marker_58640361825a950c1bed193c132d1a78.bindTooltip(
+                `<div>
+                     5. Domiciliar D04 (Freguesia do Ó) (10:06)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_58640361825a950c1bed193c132d1a78.setIcon(div_icon_994aa3172e06d92ec204e238da450ce9);
+            
+    
+            var marker_b1781fc82fbca02096ce54156e78c43a = L.marker(
+                [-23.546, -46.748],
+                {
+}
+            ).addTo(feature_group_e7408e7b7fbff38025361142758f4bdf);
+        
+    
+            var div_icon_a4cbf0c11673456dc41bfb8c2ec797a0 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#eda100;color:#0b0b0b;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e6\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_47dffed2d7e297b1e9c73e0fa6247361 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2839fd62d1d4a6b05555567e299f832f = $(`<div id="html_2839fd62d1d4a6b05555567e299f832f" style="width: 100.0%; height: 100.0%;"><b>6. Domiciliar D06 (Jaguaré)</b> (E29)<br>Veículo: Utilitário elétrico<br>Item: Cateteres e sondas (8.0 kg)<br>Prioridade: regular<br>Chegada prevista: 10:42 | Prazo: 14:00</div>`)[0];
+                popup_47dffed2d7e297b1e9c73e0fa6247361.setContent(html_2839fd62d1d4a6b05555567e299f832f);
+            
+        
+
+        marker_b1781fc82fbca02096ce54156e78c43a.bindPopup(popup_47dffed2d7e297b1e9c73e0fa6247361)
+        ;
+
+        
+    
+    
+            marker_b1781fc82fbca02096ce54156e78c43a.bindTooltip(
+                `<div>
+                     6. Domiciliar D06 (Jaguaré) (10:42)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b1781fc82fbca02096ce54156e78c43a.setIcon(div_icon_a4cbf0c11673456dc41bfb8c2ec797a0);
+            
+    
+            feature_group_e7408e7b7fbff38025361142758f4bdf.addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var feature_group_2014c1f5b560195a03936c518a40b846 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_ad88054e146ac668e0e6577c9a9244ef = L.polyline(
+                [[-23.5655, -46.7395], [-23.571, -46.708], [-23.601, -46.722], [-23.5655, -46.7395]],
+                {"bubblingMouseEvents": true, "color": "#e87ba4", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#e87ba4", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_2014c1f5b560195a03936c518a40b846);
+        
+    
+            poly_line_ad88054e146ac668e0e6577c9a9244ef.bindTooltip(
+                `<div>
+                     Moto de entrega: 15,2 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_006341c9f4d6254a941f373e8c08d6e9 = L.marker(
+                [-23.571, -46.708],
+                {
+}
+            ).addTo(feature_group_2014c1f5b560195a03936c518a40b846);
+        
+    
+            var div_icon_a07a18cf7c5c9a9fc522a3b11a38a9f5 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#e87ba4;color:#ffffff;border:3px solid #0b0b0b;text-align:center;font:600 12px/20px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e1\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_5142030dd242c236e3e801d5b047283d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1920c52b52ed08d11f4fa75d9499889d = $(`<div id="html_1920c52b52ed08d11f4fa75d9499889d" style="width: 100.0%; height: 100.0%;"><b>1. Domiciliar D05 (Butantã)</b> (E24)<br>Veículo: Moto de entrega<br>Item: Medicação oncológica oral (4.0 kg)<br>Prioridade: crítica<br>Chegada prevista: 08:07 | Prazo: 09:15</div>`)[0];
+                popup_5142030dd242c236e3e801d5b047283d.setContent(html_1920c52b52ed08d11f4fa75d9499889d);
+            
+        
+
+        marker_006341c9f4d6254a941f373e8c08d6e9.bindPopup(popup_5142030dd242c236e3e801d5b047283d)
+        ;
+
+        
+    
+    
+            marker_006341c9f4d6254a941f373e8c08d6e9.bindTooltip(
+                `<div>
+                     1. Domiciliar D05 (Butantã) (08:07)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_006341c9f4d6254a941f373e8c08d6e9.setIcon(div_icon_a07a18cf7c5c9a9fc522a3b11a38a9f5);
+            
+    
+            var marker_78a34393ed50268d1b7eae50ce5305a0 = L.marker(
+                [-23.601, -46.722],
+                {
+}
+            ).addTo(feature_group_2014c1f5b560195a03936c518a40b846);
+        
+    
+            var div_icon_0bac46ac9466bf6e7e554121f0f76240 = L.divIcon({
+  "html": "\u003cdiv style=\"width:26px;height:26px;border-radius:50%;background:#e87ba4;color:#ffffff;border:2px solid #ffffff;text-align:center;font:600 12px/22px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003e2\u003c/div\u003e",
+  "iconSize": [26, 26],
+  "iconAnchor": [13, 13],
+  "className": "empty",
+});
+        
+    
+        var popup_f8ba641f1eb16871aa28170cc3e6d162 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_25ac1a80fbe2eea71c143115891e93b3 = $(`<div id="html_25ac1a80fbe2eea71c143115891e93b3" style="width: 100.0%; height: 100.0%;"><b>2. Domiciliar D02 (Morumbi)</b> (E16)<br>Veículo: Moto de entrega<br>Item: Nutrição enteral (18.0 kg)<br>Prioridade: alta<br>Chegada prevista: 08:30 | Prazo: 11:30</div>`)[0];
+                popup_f8ba641f1eb16871aa28170cc3e6d162.setContent(html_25ac1a80fbe2eea71c143115891e93b3);
+            
+        
+
+        marker_78a34393ed50268d1b7eae50ce5305a0.bindPopup(popup_f8ba641f1eb16871aa28170cc3e6d162)
+        ;
+
+        
+    
+    
+            marker_78a34393ed50268d1b7eae50ce5305a0.bindTooltip(
+                `<div>
+                     2. Domiciliar D02 (Morumbi) (08:30)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_78a34393ed50268d1b7eae50ce5305a0.setIcon(div_icon_0bac46ac9466bf6e7e554121f0f76240);
+            
+    
+            feature_group_2014c1f5b560195a03936c518a40b846.addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var marker_1910906b8f7a8a91a3fe3ab6af7f0104 = L.marker(
+                [-23.5655, -46.7395],
+                {
+}
+            ).addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+        
+    
+            var div_icon_feb86f5b08d7fb523732f6cb6eb2fd96 = L.divIcon({
+  "html": "\u003cdiv style=\"width:30px;height:30px;border-radius:6px;background:#0b0b0b;color:#ffffff;border:2px solid #ffffff;text-align:center;font:700 11px/26px system-ui,\u0027Segoe UI\u0027,sans-serif;box-sizing:border-box;\"\u003eCD\u003c/div\u003e",
+  "iconSize": [30, 30],
+  "iconAnchor": [15, 15],
+  "className": "empty",
+});
+        
+    
+        var popup_4b7d9782062c5df073ddd6b1bb156cac = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_54db08f50c9bc6ab4a880e5e82b5a29b = $(`<div id="html_54db08f50c9bc6ab4a880e5e82b5a29b" style="width: 100.0%; height: 100.0%;"><b>Centro de Distribuição do Hospital Universitário (Butantã)</b><br>Saída: 08:00</div>`)[0];
+                popup_4b7d9782062c5df073ddd6b1bb156cac.setContent(html_54db08f50c9bc6ab4a880e5e82b5a29b);
+            
+        
+
+        marker_1910906b8f7a8a91a3fe3ab6af7f0104.bindPopup(popup_4b7d9782062c5df073ddd6b1bb156cac)
+        ;
+
+        
+    
+    
+            marker_1910906b8f7a8a91a3fe3ab6af7f0104.bindTooltip(
+                `<div>
+                     Centro de Distribuição do Hospital Universitário (Butantã)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1910906b8f7a8a91a3fe3ab6af7f0104.setIcon(div_icon_feb86f5b08d7fb523732f6cb6eb2fd96);
+            
+    
+            map_b18b1903a8ef0301068d584eaf769c3b.fitBounds(
+                [[-23.674, -46.759], [-23.48, -46.543]],
+                {"padding": [40, 40]}
+            );
+        
+    
+            var layer_control_b1a122092e33ecf6532643e55b41f3e3_layers = {
+                base_layers : {
+                },
+                overlays :  {
+                    "Fiorino refrigerada (36,5 km)" : feature_group_c0746f045b9afab5029e3eb5041b2a26,
+                    "Van refrigerada (72,8 km)" : feature_group_636263de02787a38840f834ad26a592f,
+                    "Van de carga (65,3 km)" : feature_group_af34de58722e66ae07f6ee616aa04d28,
+                    "Utilit\u00e1rio el\u00e9trico (56,6 km)" : feature_group_e7408e7b7fbff38025361142758f4bdf,
+                    "Moto de entrega (15,2 km)" : feature_group_2014c1f5b560195a03936c518a40b846,
+                },
+            };
+            let layer_control_b1a122092e33ecf6532643e55b41f3e3 = L.control.layers(
+                layer_control_b1a122092e33ecf6532643e55b41f3e3_layers.base_layers,
+                layer_control_b1a122092e33ecf6532643e55b41f3e3_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_b18b1903a8ef0301068d584eaf769c3b);
+
+        
+</script>
+</html>
