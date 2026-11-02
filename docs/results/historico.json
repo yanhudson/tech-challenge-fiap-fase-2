@@ -1,0 +1,332 @@
+{
+  "instance": "Distribuição hospitalar em São Paulo (dados sintéticos)",
+  "method": "Algoritmo genético",
+  "reference_method": "Despacho sem otimização (simulado)",
+  "seed": 42,
+  "note": "Demanda sintética. A economia é medida contra um despacho simulado, não contra a operação real do hospital.",
+  "days": [
+    {
+      "date": "2026-11-02",
+      "weekday": "segunda-feira",
+      "totals": {
+        "distance_km": 221.4,
+        "cost_brl": 408.86,
+        "route_minutes": 780.9,
+        "deliveries": 26,
+        "load_kg": 1060.7,
+        "vehicles_used": 4,
+        "on_time_rate_pct": 100.0,
+        "critical_on_time_rate_pct": 100.0,
+        "late_deliveries": 0,
+        "feasible": true
+      },
+      "savings": {
+        "reference_method": "Despacho sem otimização (simulado)",
+        "distance_km_saved": 159.8,
+        "distance_saved_pct": 41.9,
+        "cost_brl_saved": 400.12,
+        "cost_saved_pct": 49.5,
+        "route_minutes_saved": 336.6,
+        "route_minutes_saved_pct": 30.1,
+        "critical_on_time_gain_points": 62.5,
+        "reference_totals": {
+          "distance_km": 381.2,
+          "cost_brl": 808.98,
+          "route_minutes": 1117.5,
+          "critical_on_time_rate_pct": 37.5,
+          "on_time_rate_pct": 69.2
+        }
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "V1",
+          "vehicle_name": "Fiorino refrigerada",
+          "capacity_used_pct": 19.4,
+          "range_used_pct": 29.6
+        },
+        {
+          "vehicle_id": "V2",
+          "vehicle_name": "Van refrigerada",
+          "capacity_used_pct": 92.1,
+          "range_used_pct": 40.2
+        },
+        {
+          "vehicle_id": "V3",
+          "vehicle_name": "Van de carga",
+          "capacity_used_pct": 66.4,
+          "range_used_pct": 24.6
+        },
+        {
+          "vehicle_id": "V4",
+          "vehicle_name": "Utilitário elétrico",
+          "capacity_used_pct": 88.7,
+          "range_used_pct": 59.5
+        }
+      ],
+      "unused_vehicles": [
+        "Moto de entrega"
+      ],
+      "late_stops": []
+    },
+    {
+      "date": "2026-11-03",
+      "weekday": "terça-feira",
+      "totals": {
+        "distance_km": 218.2,
+        "cost_brl": 381.51,
+        "route_minutes": 755.9,
+        "deliveries": 25,
+        "load_kg": 1092.0,
+        "vehicles_used": 5,
+        "on_time_rate_pct": 100.0,
+        "critical_on_time_rate_pct": 100.0,
+        "late_deliveries": 0,
+        "feasible": true
+      },
+      "savings": {
+        "reference_method": "Despacho sem otimização (simulado)",
+        "distance_km_saved": 131.8,
+        "distance_saved_pct": 37.7,
+        "cost_brl_saved": 361.15,
+        "cost_saved_pct": 48.6,
+        "route_minutes_saved": 285.9,
+        "route_minutes_saved_pct": 27.4,
+        "critical_on_time_gain_points": 62.5,
+        "reference_totals": {
+          "distance_km": 350.0,
+          "cost_brl": 742.66,
+          "route_minutes": 1041.8,
+          "critical_on_time_rate_pct": 37.5,
+          "on_time_rate_pct": 76.0
+        }
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "V1",
+          "vehicle_name": "Fiorino refrigerada",
+          "capacity_used_pct": 12.1,
+          "range_used_pct": 23.7
+        },
+        {
+          "vehicle_id": "V2",
+          "vehicle_name": "Van refrigerada",
+          "capacity_used_pct": 66.5,
+          "range_used_pct": 28.8
+        },
+        {
+          "vehicle_id": "V3",
+          "vehicle_name": "Van de carga",
+          "capacity_used_pct": 99.9,
+          "range_used_pct": 32.3
+        },
+        {
+          "vehicle_id": "V4",
+          "vehicle_name": "Utilitário elétrico",
+          "capacity_used_pct": 78.8,
+          "range_used_pct": 47.6
+        },
+        {
+          "vehicle_id": "V5",
+          "vehicle_name": "Moto de entrega",
+          "capacity_used_pct": 89.3,
+          "range_used_pct": 16.1
+        }
+      ],
+      "unused_vehicles": [],
+      "late_stops": []
+    },
+    {
+      "date": "2026-11-04",
+      "weekday": "quarta-feira",
+      "totals": {
+        "distance_km": 213.5,
+        "cost_brl": 400.18,
+        "route_minutes": 749.4,
+        "deliveries": 25,
+        "load_kg": 957.5,
+        "vehicles_used": 4,
+        "on_time_rate_pct": 100.0,
+        "critical_on_time_rate_pct": 100.0,
+        "late_deliveries": 0,
+        "feasible": true
+      },
+      "savings": {
+        "reference_method": "Despacho sem otimização (simulado)",
+        "distance_km_saved": 204.1,
+        "distance_saved_pct": 48.9,
+        "cost_brl_saved": 497.05,
+        "cost_saved_pct": 55.4,
+        "route_minutes_saved": 430.6,
+        "route_minutes_saved_pct": 36.5,
+        "critical_on_time_gain_points": 71.4,
+        "reference_totals": {
+          "distance_km": 417.6,
+          "cost_brl": 897.23,
+          "route_minutes": 1180.0,
+          "critical_on_time_rate_pct": 28.6,
+          "on_time_rate_pct": 64.0
+        }
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "V1",
+          "vehicle_name": "Fiorino refrigerada",
+          "capacity_used_pct": 39.2,
+          "range_used_pct": 30.7
+        },
+        {
+          "vehicle_id": "V2",
+          "vehicle_name": "Van refrigerada",
+          "capacity_used_pct": 94.7,
+          "range_used_pct": 43.0
+        },
+        {
+          "vehicle_id": "V3",
+          "vehicle_name": "Van de carga",
+          "capacity_used_pct": 29.9,
+          "range_used_pct": 20.4
+        },
+        {
+          "vehicle_id": "V4",
+          "vehicle_name": "Utilitário elétrico",
+          "capacity_used_pct": 94.5,
+          "range_used_pct": 53.6
+        }
+      ],
+      "unused_vehicles": [
+        "Moto de entrega"
+      ],
+      "late_stops": []
+    },
+    {
+      "date": "2026-11-05",
+      "weekday": "quinta-feira",
+      "totals": {
+        "distance_km": 224.7,
+        "cost_brl": 432.07,
+        "route_minutes": 759.8,
+        "deliveries": 24,
+        "load_kg": 1063.5,
+        "vehicles_used": 4,
+        "on_time_rate_pct": 100.0,
+        "critical_on_time_rate_pct": 100.0,
+        "late_deliveries": 0,
+        "feasible": true
+      },
+      "savings": {
+        "reference_method": "Despacho sem otimização (simulado)",
+        "distance_km_saved": 165.4,
+        "distance_saved_pct": 42.4,
+        "cost_brl_saved": 402.45,
+        "cost_saved_pct": 48.2,
+        "route_minutes_saved": 346.6,
+        "route_minutes_saved_pct": 31.3,
+        "critical_on_time_gain_points": 50.0,
+        "reference_totals": {
+          "distance_km": 390.1,
+          "cost_brl": 834.52,
+          "route_minutes": 1106.4,
+          "critical_on_time_rate_pct": 50.0,
+          "on_time_rate_pct": 70.8
+        }
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "V1",
+          "vehicle_name": "Fiorino refrigerada",
+          "capacity_used_pct": 20.6,
+          "range_used_pct": 27.3
+        },
+        {
+          "vehicle_id": "V2",
+          "vehicle_name": "Van refrigerada",
+          "capacity_used_pct": 80.3,
+          "range_used_pct": 45.3
+        },
+        {
+          "vehicle_id": "V3",
+          "vehicle_name": "Van de carga",
+          "capacity_used_pct": 80.7,
+          "range_used_pct": 27.9
+        },
+        {
+          "vehicle_id": "V4",
+          "vehicle_name": "Utilitário elétrico",
+          "capacity_used_pct": 82.4,
+          "range_used_pct": 48.4
+        }
+      ],
+      "unused_vehicles": [
+        "Moto de entrega"
+      ],
+      "late_stops": []
+    },
+    {
+      "date": "2026-11-06",
+      "weekday": "sexta-feira",
+      "totals": {
+        "distance_km": 231.6,
+        "cost_brl": 415.46,
+        "route_minutes": 780.7,
+        "deliveries": 25,
+        "load_kg": 963.3,
+        "vehicles_used": 5,
+        "on_time_rate_pct": 100.0,
+        "critical_on_time_rate_pct": 100.0,
+        "late_deliveries": 0,
+        "feasible": true
+      },
+      "savings": {
+        "reference_method": "Despacho sem otimização (simulado)",
+        "distance_km_saved": 115.9,
+        "distance_saved_pct": 33.4,
+        "cost_brl_saved": 330.37,
+        "cost_saved_pct": 44.3,
+        "route_minutes_saved": 250.2,
+        "route_minutes_saved_pct": 24.3,
+        "critical_on_time_gain_points": 62.5,
+        "reference_totals": {
+          "distance_km": 347.5,
+          "cost_brl": 745.83,
+          "route_minutes": 1030.9,
+          "critical_on_time_rate_pct": 37.5,
+          "on_time_rate_pct": 68.0
+        }
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "V1",
+          "vehicle_name": "Fiorino refrigerada",
+          "capacity_used_pct": 21.9,
+          "range_used_pct": 23.7
+        },
+        {
+          "vehicle_id": "V2",
+          "vehicle_name": "Van refrigerada",
+          "capacity_used_pct": 98.9,
+          "range_used_pct": 48.3
+        },
+        {
+          "vehicle_id": "V3",
+          "vehicle_name": "Van de carga",
+          "capacity_used_pct": 45.3,
+          "range_used_pct": 20.4
+        },
+        {
+          "vehicle_id": "V4",
+          "vehicle_name": "Utilitário elétrico",
+          "capacity_used_pct": 72.5,
+          "range_used_pct": 57.2
+        },
+        {
+          "vehicle_id": "V5",
+          "vehicle_name": "Moto de entrega",
+          "capacity_used_pct": 64.3,
+          "range_used_pct": 12.6
+        }
+      ],
+      "unused_vehicles": [],
+      "late_stops": []
+    }
+  ]
+}

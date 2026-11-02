@@ -1,0 +1,6 @@
+﻿variant,runs,distance_mean,distance_std,distance_best,gap_to_optimum_pct,time_s_mean
+Código base (sem cruzamento efetivo),5,86563.9,3917.0,80687.4,158.2,1.86
+Base + OX corrigido,5,64931.5,5254.3,59453.9,93.7,2.14
+Base + OX + novas mutações,5,61140.5,6333.2,56355.5,82.4,2.21
+Base + OX + novas mutações + torneio e elitismo de 4,5,35478.9,898.9,34764.1,5.8,2.29
+Todas as anteriores + vizinho mais próximo,5,35023.2,429.8,34405.5,4.5,2.28
